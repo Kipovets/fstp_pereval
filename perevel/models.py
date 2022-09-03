@@ -1,4 +1,5 @@
 from django.db import models
+from .resourses import STATUS
 
 
 class Users(models.Model):
@@ -19,6 +20,7 @@ class Pereval(models.Model):
     level_summer = models.CharField(max_length=2, blank=True)
     level_autumn = models.CharField(max_length=2, blank=True)
     level_spring = models.CharField(max_length=2, blank=True)
+    status = models.CharField(max_length=2, choices=STATUS)
 
 
 class Coords(models.Model):
