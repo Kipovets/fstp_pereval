@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'perevel',
 ]
 
 MIDDLEWARE = [
@@ -85,7 +86,6 @@ DATABASES = {
         "PASSWORD": os.getenv('DB_PASSWORD'),
         "HOST": os.getenv('DB_HOST'),
         "PORT": "5432"
-
     }
 }
 

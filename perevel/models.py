@@ -11,7 +11,7 @@ class User(models.Model):
 
 
 class Pereval(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     beauty_title = models.CharField(max_length=10, default='пер.')
     title = models.CharField(max_length=25)
     other_titles = models.CharField(max_length=25)
