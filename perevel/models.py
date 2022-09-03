@@ -2,7 +2,7 @@ from django.db import models
 from .resourses import STATUS
 
 
-class Users(models.Model):
+class User(models.Model):
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=9)
     surname = models.CharField(max_length=25)
@@ -11,6 +11,7 @@ class Users(models.Model):
 
 
 class Pereval(models.Model):
+    user = models.ForeignKey(User)
     beauty_title = models.CharField(max_length=10, default='пер.')
     title = models.CharField(max_length=25)
     other_titles = models.CharField(max_length=25)
@@ -24,6 +25,7 @@ class Pereval(models.Model):
 
 
 class Coords(models.Model):
+    pereval = models.ForeignKey(Pereval, on_delete=models.CASCADE)
     latitude = models.FloatField()
     longitude = models.FloatField()
     height = models.IntegerField()
@@ -31,7 +33,7 @@ class Coords(models.Model):
 
 class Image(models.Model):
     name = models.CharField(max_length=50)
-    foto = models.ImageField
+    foto = models.ImageField()
 
 
 class PerevalImage(models.Model):
