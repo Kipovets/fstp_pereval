@@ -4,14 +4,13 @@ from .resourses import STATUS
 
 class User(models.Model):
     email = models.EmailField(unique=True)
-    phone = models.CharField(max_length=9)
-    surname = models.CharField(max_length=25)
+    fam = models.CharField(max_length=25)
     name = models.CharField(max_length=15)
-    patronymic = models.CharField(max_length=15)
+    otc = models.CharField(max_length=15)
+    phone = models.CharField(max_length=15)
 
 
 class Pereval(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
     beauty_title = models.CharField(max_length=10, default='пер.')
     title = models.CharField(max_length=25)
     other_titles = models.CharField(max_length=25)
@@ -21,21 +20,21 @@ class Pereval(models.Model):
     level_summer = models.CharField(max_length=2, blank=True)
     level_autumn = models.CharField(max_length=2, blank=True)
     level_spring = models.CharField(max_length=2, blank=True)
-    status = models.CharField(max_length=2, choices=STATUS)
+    status = models.CharField(max_length=2, choices=STATUS, default='NW')
 
 
 class Coords(models.Model):
-    pereval = models.ForeignKey(Pereval, on_delete=models.CASCADE)
-    latitude = models.FloatField()
-    longitude = models.FloatField()
-    height = models.IntegerField()
+    pereval = models.ForeignKey(Pereval, on_delete=models.CASCADE, related_name='coords')
+    latitude = models.CharField(max_length=15)
+    longitude = models.CharField(max_length=15)
+    height = models.CharField(max_length=15)
 
 
 class Image(models.Model):
-    name = models.CharField(max_length=50)
-    foto = models.ImageField()
+    data = models.ImageField()
+    title = models.CharField(max_length=50)
 
 
 class PerevalImage(models.Model):
-    foto = models.ForeignKey(Image, on_delete=models.CASCADE)
-    pereval = models.ForeignKey(Pereval, on_delete=models.CASCADE)
+    foto = models.ForeignKey(Image, on_delete=models.CASCADE, related_name='image')
+    pereval = models.ForeignKey(Pereval, on_delete=models.CASCADE, related_name='pereval')
